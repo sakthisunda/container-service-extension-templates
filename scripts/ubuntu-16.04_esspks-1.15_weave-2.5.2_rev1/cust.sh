@@ -1,28 +1,35 @@
 #!/usr/bin/env bash
 
-# exit script if any command has exit code != 0
+# exit script if any command has nonzero exit code
 set -e
 
-# set up basic networking
+# disable ipv6 to avoid possible connection errors
 echo 'net.ipv6.conf.all.disable_ipv6 = 1' >> /etc/sysctl.conf
 echo 'net.ipv6.conf.default.disable_ipv6 = 1' >> /etc/sysctl.conf
 echo 'net.ipv6.conf.lo.disable_ipv6 = 1' >> /etc/sysctl.conf
+sudo sysctl -p
+
 echo 'nameserver 8.8.8.8' >> /etc/resolvconf/resolv.conf.d/tail
 resolvconf -u
+
 systemctl restart networking.service
 while [ `systemctl is-active networking` != 'active' ]; do echo 'waiting for network'; sleep 5; done
 
-# if first commands fail, '|| :' ensures that the exit code is 0
+# '|| :' ensures that exit code is 0
 growpart /dev/sda 1 || :
 resize2fs /dev/sda1 || :
 
+# redundancy: https://github.com/vmware/container-service-extension/issues/432
+systemctl restart networking.service
+while [ `systemctl is-active networking` != 'active' ]; do echo 'waiting for network'; sleep 5; done
+
 echo 'installing docker'
 export DEBIAN_FRONTEND=noninteractive
-apt-get -q update
+apt-get -q update -o Acquire::Retries=3 -o Acquire::http::No-Cache=True -o Acquire::http::Timeout=20 -o Acquire::https::No-Cache=True -o Acquire::https::Timeout=20 -o Acquire::ftp::Timeout=20
 apt-get -q install -y apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-apt-get -q update
+apt-get -q update -o Acquire::Retries=3 -o Acquire::http::No-Cache=True -o Acquire::http::Timeout=20 -o Acquire::https::No-Cache=True -o Acquire::https::Timeout=20 -o Acquire::ftp::Timeout=20
 apt-get -q install -y docker-ce=5:18.09.7~3-0~ubuntu-xenial
 systemctl restart docker
 while [ `systemctl is-active docker` != 'active' ]; do echo 'waiting for docker'; sleep 5; done
@@ -90,7 +97,7 @@ apt-mark hold nfs-common
 apt-mark hold nfs-kernel-server
 
 echo 'upgrading the system'
-apt-get update
+apt-get -q update -o Acquire::Retries=3 -o Acquire::http::No-Cache=True -o Acquire::http::Timeout=20 -o Acquire::https::No-Cache=True -o Acquire::https::Timeout=20 -o Acquire::ftp::Timeout=20
 apt-get -y -q -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
 
 echo 'deleting downloaded files'
