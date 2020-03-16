@@ -1,4 +1,5 @@
 templates:
+  -
     compute_policy: ""
     cpu: 2
     deprecated: false
