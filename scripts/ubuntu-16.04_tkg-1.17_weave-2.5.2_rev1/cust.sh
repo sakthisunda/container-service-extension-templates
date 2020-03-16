@@ -67,14 +67,14 @@ docker load < ./vmware-kubernetes-v1.17.3+vmware.1/etcd-v3.4.3+vmware.3/images/e
 # coredns
 docker load < ./vmware-kubernetes-v1.17.3+vmware.1/coredns-v1.6.5+vmware.3/images/coredns-v1.6.5_vmware.3.tar.gz
 
-docker tag vmware/kube-proxy:v1.17.3_vmware.1 localhost:5000/kube-proxy:v1.17.3
-docker tag vmware/kube-controller-manager:v1.17.3_vmware.1 localhost:5000/kube-controller-manager:v1.17.3
-docker tag vmware/kube-apiserver:v1.17.3_vmware.1 localhost:5000/kube-apiserver:v1.17.3
-docker tag vmware/kube-scheduler:v1.17.3_vmware.1 localhost:5000/kube-scheduler:v1.17.3
-docker tag vmware/pause:3.1 localhost:5000/pause:3.1
-docker tag vmware/e2e-test-v1.17.3_vmware.1 localhost:5000/e2e-test:v1.17.3
-docker tag vmware/etcd-v3.4.3_vmware.3 localhost:5000/etcd:v3.4.3
-docker tag vmware/coredns-v1.6.5_vmware.3  localhost:5000/coredns:v1.6.5
+docker tag vmware.io/kube-proxy:v1.17.3_vmware.1 localhost:5000/kube-proxy:v1.17.3
+docker tag vmware.io/kube-controller-manager:v1.17.3_vmware.1 localhost:5000/kube-controller-manager:v1.17.3
+docker tag vmware.io/kube-apiserver:v1.17.3_vmware.1 localhost:5000/kube-apiserver:v1.17.3
+docker tag vmware.io/kube-scheduler:v1.17.3_vmware.1 localhost:5000/kube-scheduler:v1.17.3
+docker tag vmware.io/pause:3.1 localhost:5000/pause:3.1
+docker tag vmware.io/e2e-test:v1.17.3_vmware.1 localhost:5000/e2e-test:v1.17.3
+docker tag vmware.io/etcd:v3.4.3_vmware.3 localhost:5000/etcd:v3.4.3
+docker tag vmware.io/coredns:v1.6.5_vmware.3  localhost:5000/coredns:v1.6.5
 
 docker push localhost:5000/kube-proxy:v1.17.3
 docker push localhost:5000/kube-controller-manager:v1.17.3
@@ -88,10 +88,6 @@ docker push localhost:5000/coredns:v1.6.5
 # download weave.yml
 export kubever=$(kubectl version --client | base64 | tr -d '\n')
 wget --no-verbose -O weave.yml "https://cloud.weave.works/k8s/net?k8s-version=$kubever&v=2.5.2"
-
-# install weave net https://www.weave.works/docs/net/latest/install/installing-weave/
-curl -L git.io/weave -o /usr/local/bin/weave
-chmod a+x /usr/local/bin/weave
 
 echo 'installing required software for NFS'
 apt-get -q install -y nfs-common nfs-kernel-server
