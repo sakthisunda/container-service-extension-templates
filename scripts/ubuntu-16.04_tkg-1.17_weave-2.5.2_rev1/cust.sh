@@ -82,8 +82,8 @@ docker push localhost:5000/kube-apiserver:v1.17.3
 docker push localhost:5000/kube-scheduler:v1.17.3
 docker push localhost:5000/pause:3.1
 docker push localhost:5000/e2e-test:v1.17.3
-docker push localhost:5000/etcd:v3.4.3
-docker push localhost:5000/coredns:v1.6.5
+docker push localhost:5000/etcd:3.4.3
+docker push localhost:5000/coredns:1.6.5
 
 # download weave.yml
 export kubever=$(kubectl version --client | base64 | tr -d '\n')
