@@ -73,8 +73,8 @@ docker tag vmware.io/kube-apiserver:v1.17.3_vmware.1 localhost:5000/kube-apiserv
 docker tag vmware.io/kube-scheduler:v1.17.3_vmware.1 localhost:5000/kube-scheduler:v1.17.3
 docker tag vmware.io/pause:3.1 localhost:5000/pause:3.1
 docker tag vmware.io/e2e-test:v1.17.3_vmware.1 localhost:5000/e2e-test:v1.17.3
-docker tag vmware.io/etcd:v3.4.3_vmware.3 localhost:5000/etcd:v3.4.3
-docker tag vmware.io/coredns:v1.6.5_vmware.3  localhost:5000/coredns:v1.6.5
+docker tag vmware.io/etcd:v3.4.3_vmware.3 localhost:5000/etcd:3.4.3
+docker tag vmware.io/coredns:v1.6.5_vmware.3  localhost:5000/coredns:1.6.5
 
 docker push localhost:5000/kube-proxy:v1.17.3
 docker push localhost:5000/kube-controller-manager:v1.17.3
