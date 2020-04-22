@@ -1,4 +1,7 @@
 
+Users can now create VMware Essential PKS Kubernetes clusters using CSE. For VMware vCloud Director 10, please follow the section **Deployment of Kubernetes clusters from VMware TKG Template**
+
+
 ## Deployment of Kubernetes clusters from VMware TKG Template
 
 VMware TKG template created by CSE has a default compute policy "tkg". This policy is used to restrict Kubernetes cluster deployments to organization VDCs that have the matching policy in VMware vCloud Director. In order to enable Kubernetes cluster deployments using this template, system administrator needs to add the policy to the desired organization VDCs. More information on how CSE uses compute policies can be found [here](TODO)

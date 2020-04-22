@@ -42,6 +42,4 @@ Container Service Extension 2.6.0 enables orchestration of VMware's TKG Kubernet
      - ```$ cse template install -c path/to/myconfig.yaml TEMPLATE_NAME TEMPLATE_REVISION_NUMBER```
 3. In the VMware vCloud Director organization specified in the CSE config file, you should see the VMware TKG template in the catalog (also specified in the CSE config file).
 
-Users can now create VMware Essential PKS Kubernetes clusters using CSE. For VMware vCloud Director 10, please follow the section **Deployment of Kubernetes clusters from VMware TKG Template**
-
 ---
