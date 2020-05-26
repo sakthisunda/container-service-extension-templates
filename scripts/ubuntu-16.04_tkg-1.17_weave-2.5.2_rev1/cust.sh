@@ -91,6 +91,10 @@ docker push localhost:5000/coredns:1.6.5
 export kubever=$(kubectl version --client | base64 | tr -d '\n')
 wget --no-verbose -O weave.yml "https://cloud.weave.works/k8s/net?k8s-version=$kubever&v=2.5.2"
 
+# pull weave docker images in case cluster has no outbound internet access
+docker pull weaveworks/weave-npc:2.5.2
+docker pull weaveworks/weave-kube:2.5.2
+
 echo 'installing required software for NFS'
 apt-get -q install -y nfs-common nfs-kernel-server
 systemctl stop nfs-kernel-server.service
