@@ -1,6 +1,6 @@
 templates:
   -
-    kind: "tkgplus"
+    kind: "TKG+"
     compute_policy: ""
     cpu: 2
     deprecated: false
