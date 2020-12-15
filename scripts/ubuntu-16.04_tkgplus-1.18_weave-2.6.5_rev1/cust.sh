@@ -30,8 +30,8 @@ apt-get -q install -y apt-transport-https ca-certificates curl software-properti
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 apt-get -q update -o Acquire::Retries=3 -o Acquire::http::No-Cache=True -o Acquire::http::Timeout=20 -o Acquire::https::No-Cache=True -o Acquire::https::Timeout=20 -o Acquire::ftp::Timeout=20
-apt-get -q install -y docker-ce=5:18.09.7~3-0~ubuntu-xenial
-apt-get -q install -y docker-ce-cli=5:18.09.7~3-0~ubuntu-xenial --allow-downgrades
+apt-get -q install -y docker-ce=5:19.03.12~3-0~ubuntu-xenial
+apt-get -q install -y docker-ce-cli=5:19.03.12~3-0~ubuntu-xenial --allow-downgrades
 
 systemctl restart docker
 while [ `systemctl is-active docker` != 'active' ]; do echo 'waiting for docker'; sleep 5; done
