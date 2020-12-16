@@ -58,34 +58,34 @@ docker load < ./vmware-kubernetes-v1.18.10+vmware.1/kubernetes-v1.18.10+vmware.1
 docker load < ./vmware-kubernetes-v1.18.10+vmware.1/kubernetes-v1.18.10+vmware.1/images/kube-scheduler-v1.18.10_vmware.1.tar.gz
 
 # pause
-docker load < ./vmware-kubernetes-v1.18.10+vmware.1/kubernetes-v1.18.10+vmware.1/images/pause-3.1.tar.gz
+docker load < ./vmware-kubernetes-v1.18.10+vmware.1/kubernetes-v1.18.10+vmware.1/images/pause-3.2.tar.gz
 
 # e2e test
 docker load < ./vmware-kubernetes-v1.18.10+vmware.1/kubernetes-v1.18.10+vmware.1/images/e2e-test-v1.18.10_vmware.1.tar.gz
 
 # etcd
-docker load < ./vmware-kubernetes-v1.18.10+vmware.1/etcd-v3.4.3+vmware.3/images/etcd-v3.4.3_vmware.3.tar.gz
+docker load < ./vmware-kubernetes-v1.18.10+vmware.1/etcd-v3.4.3+vmware.11/images/etcd-v3.4.3_vmware.11.tar.gz
 
 # coredns
-docker load < ./vmware-kubernetes-v1.18.10+vmware.1/coredns-v1.6.5+vmware.3/images/coredns-v1.6.5_vmware.3.tar.gz
+docker load < ./vmware-kubernetes-v1.18.10+vmware.1/coredns-v1.6.7+vmware.6/images/coredns-v1.6.7_vmware.6.tar.gz
 
-docker tag vmware.io/kube-proxy:v1.18.10_vmware.1 localhost:5000/kube-proxy:v1.18.10
-docker tag vmware.io/kube-controller-manager:v1.18.10_vmware.1 localhost:5000/kube-controller-manager:v1.18.10
-docker tag vmware.io/kube-apiserver:v1.18.10_vmware.1 localhost:5000/kube-apiserver:v1.18.10
-docker tag vmware.io/kube-scheduler:v1.18.10_vmware.1 localhost:5000/kube-scheduler:v1.18.10
-docker tag vmware.io/pause:3.1 localhost:5000/pause:3.1
-docker tag vmware.io/e2e-test:v1.18.10_vmware.1 localhost:5000/e2e-test:v1.18.10
-docker tag vmware.io/etcd:v3.4.3_vmware.3 localhost:5000/etcd:3.4.3-0
-docker tag vmware.io/coredns:v1.6.5_vmware.3  localhost:5000/coredns:1.6.5
+docker tag registry.tkg.vmware.run/kube-proxy:v1.18.10_vmware.1 localhost:5000/kube-proxy:v1.18.10
+docker tag registry.tkg.vmware.run/kube-controller-manager:v1.18.10_vmware.1 localhost:5000/kube-controller-manager:v1.18.10
+docker tag registry.tkg.vmware.run/kube-apiserver:v1.18.10_vmware.1 localhost:5000/kube-apiserver:v1.18.10
+docker tag registry.tkg.vmware.run/kube-scheduler:v1.18.10_vmware.1 localhost:5000/kube-scheduler:v1.18.10
+docker tag registry.tkg.vmware.run/pause:3.2 localhost:5000/pause:3.2
+docker tag registry.tkg.vmware.run/e2e-test:v1.18.10_vmware.1 localhost:5000/e2e-test:v1.18.10
+docker tag registry.tkg.vmware.run/etcd:v3.4.3_vmware.11 localhost:5000/etcd:3.4.3-0
+docker tag registry.tkg.vmware.run/coredns:v1.6.7_vmware.6  localhost:5000/coredns:1.6.7
 
 docker push localhost:5000/kube-proxy:v1.18.10
 docker push localhost:5000/kube-controller-manager:v1.18.10
 docker push localhost:5000/kube-apiserver:v1.18.10
 docker push localhost:5000/kube-scheduler:v1.18.10
-docker push localhost:5000/pause:3.1
+docker push localhost:5000/pause:3.2
 docker push localhost:5000/e2e-test:v1.18.10
 docker push localhost:5000/etcd:3.4.3-0
-docker push localhost:5000/coredns:1.6.5
+docker push localhost:5000/coredns:1.6.7
 
 # download weave.yml
 export kubever=$(kubectl version --client | base64 | tr -d '\n')
